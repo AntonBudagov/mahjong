@@ -1,10 +1,11 @@
 :host {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
-  color: #333;
+  color: #272B3A;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #efeeee;
 }
 
 h1,
@@ -20,9 +21,6 @@ p {
   margin: 0;
 }
 
-.spacer {
-  flex: 1;
-}
 
 .toolbar {
   position: absolute;
@@ -35,19 +33,11 @@ p {
   background-color: #1976d2;
   color: white;
   font-weight: 600;
+  padding: 0 16px;
 }
 
 .toolbar img {
   margin: 0 16px;
-}
-
-.toolbar #twitter-logo {
-  height: 40px;
-  margin: 0 16px;
-}
-
-.toolbar #twitter-logo:hover {
-  opacity: 0.8;
 }
 
 .content {
@@ -57,4 +47,78 @@ p {
   max-width: 960px;
   flex-direction: column;
   align-items: center;
+}
+
+
+.card-container {
+  display: grid;
+  margin-top: 16px;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.card {
+  border-radius: 4px;
+  background: linear-gradient(135deg,  #f0f0f0 0%,#dcdcdc 50%,#c7c7c7 100%);
+  height: 80px;
+  width: 80px;
+  margin: 0 8px 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+  font-size: 34px;
+  font-weight: bold;
+  border: 1px solid #2D313F;
+  box-sizing: border-box;
+  span {
+    display: none;
+  }
+
+  &.active {
+    border: 1px solid #F2F2F2;
+    box-shadow: inset 8px 4px 20px rgba(0, 0, 0, 0.1);
+    background: #EFEEEE;
+    pointer-events: none;
+
+    span {
+      pointer-events: none;
+      display: block;
+    }
+  }
+  &.couple {
+    box-shadow: inset 8px 4px 20px rgba(0, 0, 0, 0.1);
+    background: #EFEEEE;
+    color: cornflowerblue;
+    pointer-events: none;
+    span {
+      display: block;
+    }
+  }
+}
+
+.card-container .card:not(:last-child) {
+  margin-right: 0;
+}
+
+.games {
+  &.start {
+    .card {
+      pointer-events: none;
+
+      span {
+        display: block;
+      }
+    }
+  }
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 1em;
+  button {
+    display: block;
+  }
 }
