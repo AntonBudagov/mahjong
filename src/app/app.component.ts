@@ -13,28 +13,26 @@ export class AppComponent implements OnInit {
   selectedNumber = [];
   pairSelectedNumber = [];
   allPair = [];
-  cardsNumber = [];
+  cardsNumber = Array(50).fill(0).map((_, i) => i + 1);
   initGame = [];
 
   ngOnInit(): void {
-    this.randsNumber();
+    this.startGame();
   }
 
   /**
    *  1) fill number from 1 to 50
    *  2) rand position
    */
-  randsNumber() {
-    this.cardsNumber = [
-      ...Array(50).fill(0).map((_, i) => i + 1)];
+  randsNumber(arr: Array<number>) {
     // simple shuffle array
     // this.cardsNumber.sort(() => Math.random() - 0.5);
     // Fisher–Yates shuffle
-    for (let i = this.cardsNumber.length - 1; i > 0; i--) {
+    for (let i = arr.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + this.min));
-      [this.cardsNumber[i], this.cardsNumber[j]] = [this.cardsNumber[j], this.cardsNumber[i]];
+      [arr[i], arr[j]] = [arr[j], arr[i]];
     }
-    this.startGame();
+    return arr;
   }
 
   trackByFn(index) {
@@ -53,8 +51,11 @@ export class AppComponent implements OnInit {
     /**
      * take rand array
      * slice first 15 elements
+     * concat two half Array
+     * rand again
      */
-    this.initGame = [...this.cardsNumber.slice(0, this.max), ...this.cardsNumber.slice(0, this.max)];
+    const halfArray = this.randsNumber(this.cardsNumber).slice(0, this.max);
+    this.initGame = this.randsNumber([...halfArray, ...halfArray]);
     this.starting = true;
     setTimeout(() => {
       this.starting = false;
